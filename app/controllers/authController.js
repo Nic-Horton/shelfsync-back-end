@@ -33,6 +33,9 @@ exports.signIn = (request, response) => {
 			const token = jwt.sign({ id: user.id }, config.secret, {
 				expiresIn: 86400,
 			});
+
+			response.cookie('accessToken', token, { httpOnly: true, secure: true });
+
 			response
 				.status(200)
 				.send({ id: user.id, username: user.username, accessToken: token });
