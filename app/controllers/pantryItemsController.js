@@ -59,25 +59,27 @@ exports.update = async (request, response) => {
 		}
 
 		if (name !== undefined && name !== pantryItem.name) {
-			// pantryItem.name = request.body.name;
 			updateFields.name = name;
 		}
 		if (quantity !== undefined && quantity !== pantryItem.quantity) {
-			// pantryItem.quantity = request.body.quantity;
+			if (typeof quantity !== 'number') {
+				return response.status(400).send('Quantity must be number');
+			}
+			if (quantity < 0) {
+				return response.status(400).send('Quantity must be non-negative');
+			}
 			updateFields.quantity = quantity;
 		}
 		if (unit !== undefined && unit !== pantryItem.unit) {
-			// pantryItem.unit = request.body.unit;
 			updateFields.unit = unit;
 		}
 		if (category !== undefined && category !== pantryItem.category) {
-			// pantryItem.category = request.body.category;
 			updateFields.category = category;
 		}
 
-		console.log(updateFields);
+		// console.log(updateFields);
 		if (Object.keys(updateFields).length === 0) {
-			return response.status(300).send('Item record has nothing to update');
+			return response.status(400).send('Item record has nothing to update');
 		}
 
 		await pantryItem.update(updateFields);
