@@ -22,4 +22,5 @@ module.exports = (app) => {
 	);
 
 	app.post('/signin', authController.signIn);
+	app.post('/signout', authController.signOut);
 };

@@ -42,3 +42,9 @@ exports.signIn = (request, response) => {
 		})
 		.catch((error) => response.status(500).send(error));
 };
+
+exports.signOut = (request, response) => {
+	response.clearCookie('accessToken');
+
+	response.status(200).send('You have been successfully signed out.');
+};
