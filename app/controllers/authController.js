@@ -38,7 +38,12 @@ exports.signIn = (request, response) => {
 
 			response
 				.status(200)
-				.send({ id: user.id, username: user.username, accessToken: token });
+				.send({
+					id: user.id,
+					username: user.username,
+					accessToken: token,
+					token: true,
+				});
 		})
 		.catch((error) => response.status(500).send(error));
 };
