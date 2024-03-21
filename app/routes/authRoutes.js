@@ -16,7 +16,7 @@ module.exports = (app) => {
 		'/signup',
 		[
 			verifySignup.checkForDuplicateUsername,
-			verifySignup.checkForDuplicateEmail,
+			// verifySignup.checkForDuplicateEmail,
 		],
 		authController.signUp
 	);

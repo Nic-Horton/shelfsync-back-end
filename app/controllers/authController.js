@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 exports.signUp = (request, response) => {
 	return User.create({
 		username: request.body.username,
-		email: request.body.email,
+		// email: request.body.email,
 		password: bcrypt.hashSync(request.body.password, 10),
 	})
 		.then((newUser) => response.status(201).send(newUser))
@@ -36,14 +36,12 @@ exports.signIn = (request, response) => {
 
 			response.cookie('accessToken', token, { httpOnly: true, secure: true });
 
-			response
-				.status(200)
-				.send({
-					id: user.id,
-					username: user.username,
-					accessToken: token,
-					token: true,
-				});
+			response.status(200).send({
+				id: user.id,
+				username: user.username,
+				accessToken: token,
+				token: true,
+			});
 		})
 		.catch((error) => response.status(500).send(error));
 };

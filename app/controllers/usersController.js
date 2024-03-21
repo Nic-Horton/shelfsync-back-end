@@ -16,7 +16,7 @@ exports.show = (request, response) => {
 exports.update = async (request, response) => {
 	try {
 		const { userId } = request.params;
-		const { email, password } = request.body;
+		const { password } = request.body;
 		const updateFields = {};
 		const user = await User.findByPk(userId);
 
@@ -24,9 +24,9 @@ exports.update = async (request, response) => {
 			return response.status(404).json({ error: 'User not found' });
 		}
 
-		if (email !== undefined && email !== user.email) {
-			updateFields.email = email;
-		}
+		// if (email !== undefined && email !== user.email) {
+		// 	updateFields.email = email;
+		// }
 
 		if (password !== undefined) {
 			const isSamePassword = bcrypt.compareSync(password, user.password);

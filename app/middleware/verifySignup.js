@@ -10,14 +10,14 @@ const checkForDuplicateUsername = (request, response, next) => {
 	});
 };
 
-const checkForDuplicateEmail = (request, response, next) => {
-	User.findOne({ where: { email: request.body.email } }).then((user) => {
-		if (user) {
-			response.status(400).send({ error: 'Email is already in use' });
-			return;
-		}
-		next();
-	});
-};
+// const checkForDuplicateEmail = (request, response, next) => {
+// 	User.findOne({ where: { email: request.body.email } }).then((user) => {
+// 		if (user) {
+// 			response.status(400).send({ error: 'Email is already in use' });
+// 			return;
+// 		}
+// 		next();
+// 	});
+//};
 
-module.exports = { checkForDuplicateUsername, checkForDuplicateEmail };
+module.exports = { checkForDuplicateUsername };
