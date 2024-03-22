@@ -15,7 +15,7 @@ exports.show = (request, response) => {
 
 exports.update = async (request, response) => {
 	try {
-		const { userId } = request.params;
+		const userId = request.userId;
 		const { password } = request.body;
 		const updateFields = {};
 		const user = await User.findByPk(userId);
