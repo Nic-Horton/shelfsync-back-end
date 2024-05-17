@@ -30,17 +30,25 @@ exports.signIn = (request, response) => {
 
 			if (!validPassword) return response.status(401).send(signInError);
 
-			const token = jwt.sign({ id: user.id }, config.secret, {
-				expiresIn: 86400,
-			});
+			const token = jwt.sign(
+				{ id: user.id, username: user.username },
+				config.secret,
+				{
+					expiresIn: '1h',
+				}
+			);
 
-			response.cookie('accessToken', token, { httpOnly: true, secure: true });
+			response.cookie('accessToken', token, {
+				httpOnly: true,
+				secure: true,
+				maxAge: 3600000,
+			});
 
 			response.status(200).send({
 				id: user.id,
 				username: user.username,
 				accessToken: token,
-				token: true,
+				// token: true,
 			});
 		})
 		.catch((error) => response.status(500).send(error));
