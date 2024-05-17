@@ -2,15 +2,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models').User;
 
 exports.show = (request, response) => {
-	return User.findByPk(request.params.userId)
-		.then((user) => {
-			if (!user) {
-				response.status(404).send({ error: 'User not found' });
-			} else {
-				response.status(200).send(user);
-			}
-		})
-		.catch((error) => response.status(400).send(error));
+	response.json({ message: 'User authorized' });
 };
 
 exports.update = async (request, response) => {
